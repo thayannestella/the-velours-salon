@@ -1,0 +1,512 @@
+:root {
+    --burgundy: #4a0404;
+    /* Deep velvet red */
+    --burgundy-light: #6a0b0b;
+    --gold: #d4af37;
+    --gold-light: #f3e5ab;
+    --gold-dark: #996515;
+    --velvet-shadow: rgba(0, 0, 0, 0.6);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #1a1a1a;
+    background-image: radial-gradient(circle at center, #3a3a3a 0%, #0a0a0a 100%);
+    font-family: 'Cinzel', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow: hidden;
+    color: var(--gold);
+}
+
+.scene {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1200px;
+    padding: 20px;
+}
+
+.invitation-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    height: 80vh;
+    max-height: 700px;
+    background-color: var(--burgundy);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 50px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    transform-style: preserve-3d;
+}
+
+.invitation-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, #6b0c22 0%, #3e0505 100%), url('https://www.transparenttextures.com/patterns/handmade-paper.png');
+    background-blend-mode: overlay;
+    opacity: 0.95;
+    z-index: 0;
+}
+
+/* The Flaps */
+.flap {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--burgundy) 0%, #2f020c 100%);
+    z-index: 10;
+    transform-style: preserve-3d;
+    transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.velvet-texture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
+    background-blend-mode: multiply;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.left-flap {
+    left: 0;
+    transform-origin: left center;
+    border-right: 2px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.right-flap {
+    right: 0;
+    transform-origin: right center;
+    border-left: 2px solid rgba(212, 175, 55, 0.4);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Open State */
+.invitation-wrapper.is-open .left-flap {
+    transform: rotateY(-130deg);
+}
+
+.invitation-wrapper.is-open .right-flap {
+    transform: rotateY(130deg);
+}
+
+/* Decorative Gold Filigree placeholder (Adjusting to match new exterior) */
+.gold-filigree-left,
+.gold-filigree-right {
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background: linear-gradient(to bottom, transparent 0%, var(--gold) 20%, var(--gold) 80%, transparent 100%);
+    box-shadow: 0 0 5px rgba(212, 175, 55, 0.6);
+}
+
+.gold-filigree-left {
+    right: 0;
+}
+
+.gold-filigree-right {
+    left: 0;
+}
+
+
+/* Inside Content - Acrylic/Glass Card effect */
+.inside-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+.acrylic-card {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.gold-border {
+    border: 2px solid var(--gold);
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    position: relative;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, transparent 50%, rgba(212, 175, 55, 0.05) 100%);
+    box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.2);
+}
+
+/* Corner Ornaments on Internal Border */
+.gold-border::before,
+.gold-border::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--gold);
+}
+
+.gold-border::before {
+    top: -8px;
+    left: -8px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.gold-border::after {
+    bottom: -8px;
+    right: -8px;
+    border-left: none;
+    border-top: none;
+}
+
+/* Text Styling & Ornaments */
+.top-ornament {
+    width: 250px;
+    height: 35px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23C59348'/%3E%3Cstop offset='25%25' stop-color='%23F5DF96'/%3E%3Cstop offset='50%25' stop-color='%23D4AF37'/%3E%3Cstop offset='75%25' stop-color='%23FDF4C3'/%3E%3Cstop offset='100%25' stop-color='%23996515'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M100,5 C120,-5 140,25 120,35 C110,40 105,25 100,20 C95,25 90,40 80,35 C60,25 80,-5 100,5 Z' fill='none' stroke='url(%23g)' stroke-width='2'/%3E%3Cpath d='M100,10 C110,5 120,15 110,25 C105,30 100,20 100,20 C100,20 95,30 90,25 C80,15 90,5 100,10 Z' fill='url(%23g)'/%3E%3Cpath d='M125,15 C140,5 160,20 145,30 C135,35 130,25 125,15 Z' fill='none' stroke='url(%23g)' stroke-width='1.5'/%3E%3Cpath d='M75,15 C60,5 40,20 55,30 C65,35 70,25 75,15 Z' fill='none' stroke='url(%23g)' stroke-width='1.5'/%3E%3Cpath d='M150,20 C165,15 180,25 170,35' fill='none' stroke='url(%23g)' stroke-width='1.5'/%3E%3Cpath d='M50,20 C35,15 20,25 30,35' fill='none' stroke='url(%23g)' stroke-width='1.5'/%3E%3Ccircle cx='145' cy='22' r='2.5' fill='url(%23g)'/%3E%3Ccircle cx='55' cy='22' r='2.5' fill='url(%23g)'/%3E%3Ccircle cx='170' cy='35' r='1.5' fill='url(%23g)'/%3E%3Ccircle cx='30' cy='35' r='1.5' fill='url(%23g)'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 5px auto;
+}
+
+.bottom-ornament {
+    width: 250px;
+    height: 35px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23C59348'/%3E%3Cstop offset='25%25' stop-color='%23F5DF96'/%3E%3Cstop offset='50%25' stop-color='%23D4AF37'/%3E%3Cstop offset='75%25' stop-color='%23FDF4C3'/%3E%3Cstop offset='100%25' stop-color='%23996515'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M100,5 C120,-5 140,25 120,35 C110,40 105,25 100,20 C95,25 90,40 80,35 C60,25 80,-5 100,5 Z' fill='none' stroke='url(%23g)' stroke-width='2'/%3E%3Cpath d='M100,10 C110,5 120,15 110,25 C105,30 100,20 100,20 C100,20 95,30 90,25 C80,15 90,5 100,10 Z' fill='url(%23g)'/%3E%3Cpath d='M125,15 C140,5 160,20 145,30 C135,35 130,25 125,15 Z' fill='none' stroke='url(%23g)' stroke-width='1.5'/%3E%3Cpath d='M75,15 C60,5 40,20 55,30 C65,35 70,25 75,15 Z' fill='none' stroke='url(%23g)' stroke-width='1.5'/%3E%3Cpath d='M150,20 C165,15 180,25 170,35' fill='none' stroke='url(%23g)' stroke-width='1.5'/%3E%3Cpath d='M50,20 C35,15 20,25 30,35' fill='none' stroke='url(%23g)' stroke-width='1.5'/%3E%3Ccircle cx='145' cy='22' r='2.5' fill='url(%23g)'/%3E%3Ccircle cx='55' cy='22' r='2.5' fill='url(%23g)'/%3E%3Ccircle cx='170' cy='35' r='1.5' fill='url(%23g)'/%3E%3Ccircle cx='30' cy='35' r='1.5' fill='url(%23g)'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 5px auto;
+    transform: rotate(180deg);
+}
+
+.letter-content {
+    font-family: 'Pinyon Script', cursive;
+    color: var(--gold-light);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    text-align: justify;
+    font-size: 1.45rem;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    word-spacing: -2px;
+    overflow-y: auto;
+    padding-right: 15px;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+}
+
+.letter-content em.highlight {
+    font-weight: 400;
+    background: linear-gradient(135deg, #CFB060 0%, #F5DF96 20%, #D4AF37 50%, #FDF4C3 80%, #A67B27 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.8));
+    font-size: 1.65rem;
+}
+
+/* Custom Scrollbar for letter - made extremely subtle */
+.letter-content::-webkit-scrollbar {
+    width: 2px;
+}
+
+.letter-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.letter-content::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.3);
+    border-radius: 10px;
+}
+
+.letter-content h3 {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 1.35rem;
+    letter-spacing: 2px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    background: linear-gradient(135deg, #CFB060 0%, #F5DF96 20%, #D4AF37 50%, #FDF4C3 80%, #A67B27 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+    filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.2));
+}
+
+.letter-content ol {
+    margin-left: 20px;
+    text-align: left;
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.letter-content li {
+    margin-bottom: 8px;
+    padding-left: 8px;
+}
+
+.letter-content li span {
+    font-family: 'Pinyon Script', cursive;
+    color: var(--gold-light);
+    font-weight: normal;
+    font-size: 1.45rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.letter-content p.closing {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.letter-content p.signature {
+    text-align: right;
+    font-size: 2.8rem;
+    font-family: 'Monsieur La Doulaise', cursive;
+    margin-top: 5px;
+    font-weight: 400;
+    background: linear-gradient(135deg, #CFB060 0%, #F5DF96 20%, #D4AF37 50%, #FDF4C3 80%, #A67B27 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.8));
+}
+
+.action-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.action-button {
+    display: inline-block;
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #1f0404 0%, #3a0a0a 100%);
+    color: var(--gold-light);
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    text-decoration: none;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6), inset 0 0 5px rgba(212, 175, 55, 0.1);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.action-button:hover {
+    background: linear-gradient(135deg, #2a0505 0%, #4a0c0c 100%);
+    border-color: rgba(212, 175, 55, 0.8);
+    color: #fff;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(212, 175, 55, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Wax Seal wrapper & Animation */
+.wax-seal-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: opacity 0.5s ease 0.1s, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    /* Pushing the wrapper lower visually but keeping it centered on the split */
+    margin-top: 30px;
+}
+
+.invitation-wrapper.is-open .wax-seal-wrapper {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3);
+    pointer-events: none;
+}
+
+.wax-seal {
+    width: 110px;
+    height: 110px;
+    /* Reduzindo o vermelho e o tornando um selo predominantemente dourado */
+    background: radial-gradient(circle at center, #D4AF37 0%, #996515 50%, #5c3c0b 100%);
+    border-radius: 50%;
+    box-shadow:
+        inset 0 0 15px rgba(255, 255, 255, 0.3),
+        0 8px 25px rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Imperfect edges matching wax */
+.wax-seal::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 48% 52% 51% 49% / 54% 46% 53% 47%;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    background: transparent;
+    pointer-events: none;
+}
+
+.seal-inner {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    /* Creating a rich gold center mirroring a metallic seal */
+    background: radial-gradient(circle at top left, #F5DF96 0%, #D4AF37 45%, #996515 90%, #4a2f05 100%);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.7), 0 0 15px rgba(255, 255, 255, 0.2);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.seal-wreath {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    border-radius: 50%;
+    border: 1px dashed rgba(100, 40, 10, 0.6);
+    /* Darker dashed inlay */
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.initials {
+    font-family: 'Monsieur La Doulaise', cursive;
+    font-weight: 400;
+    /* Mudando o texto de ouro brilhante para um marrom/ouro envelhecido escuro */
+    color: #3b2207;
+    font-size: 3.2rem;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.4), -1px -1px 1px rgba(0, 0, 0, 0.6);
+    background: linear-gradient(135deg, #2c1a06 0%, #5c3c0b 50%, #170d02 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.4));
+    z-index: 2;
+}
+
+.hint {
+    margin-top: 40px;
+    /* Pushed lower */
+    font-size: 0.75rem;
+    color: var(--gold-light);
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: pulse 2.5s infinite;
+    background: rgba(10, 2, 4, 0.608);
+    /* Darker, regencial pill background */
+    padding: 10px 22px;
+    border-radius: 30px;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    /* Very subtle gold trim */
+    backdrop-filter: blur(4px);
+    white-space: nowrap;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.75;
+        transform: scale(0.98);
+    }
+
+    50% {
+        opacity: 0.95;
+        transform: scale(1.02);
+    }
+
+    100% {
+        opacity: 0.75;
+        transform: scale(0.98);
+    }
+}
+
+@media (max-width: 480px) {
+    .letter-content {
+        font-size: 1.05rem;
+        gap: 10px;
+    }
+
+    .letter-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .letter-content p.signature {
+        font-size: 1.5rem;
+    }
+
+    .wax-seal {
+        width: 85px;
+        height: 85px;
+    }
+
+    .seal-inner {
+        width: 60px;
+        height: 60px;
+    }
+
+    .initials {
+        font-size: 1.8rem;
+    }
+}
