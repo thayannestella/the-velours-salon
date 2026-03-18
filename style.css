@@ -41,9 +41,9 @@ body {
 .invitation-wrapper {
     position: relative;
     width: 100%;
-    max-width: 420px;
-    height: 80vh;
-    max-height: 700px;
+    max-width: 480px;
+    height: 85vh;
+    max-height: 800px;
     background-color: var(--burgundy);
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 50px rgba(0, 0, 0, 0.5);
     border-radius: 4px;
@@ -229,7 +229,7 @@ body {
     color: var(--gold-light);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
     text-align: justify;
-    font-size: 1.45rem;
+    font-size: 1.55rem;
     line-height: 1.15;
     letter-spacing: -0.5px;
     word-spacing: -2px;
@@ -251,7 +251,7 @@ body {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.8));
-    font-size: 1.65rem;
+    font-size: 1.55rem;
 }
 
 /* Custom Scrollbar for letter - made extremely subtle */
@@ -301,13 +301,16 @@ body {
     font-family: 'Pinyon Script', cursive;
     color: var(--gold-light);
     font-weight: normal;
-    font-size: 1.45rem;
+    font-size: 1.55rem;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .letter-content p.closing {
-    text-align: center;
+    text-align: right;
     margin-top: 15px;
+    letter-spacing: 0.5px;
+    word-spacing: -1px;
+    margin-bottom: -8px;
 }
 
 .letter-content p.signature {
@@ -483,17 +486,34 @@ body {
 }
 
 @media (max-width: 480px) {
+    .scene {
+        padding: 5px;
+    }
+
+    .inside-content {
+        padding: 12px;
+    }
+
+    .gold-border {
+        padding: 15px 10px;
+    }
+
     .letter-content {
-        font-size: 1.05rem;
+        font-size: 1.35rem;
         gap: 10px;
     }
 
+    .letter-content em.highlight,
+    .letter-content li span {
+        font-size: 1.35rem;
+    }
+
     .letter-content h3 {
-        font-size: 1.3rem;
+        font-size: 1.25rem;
     }
 
     .letter-content p.signature {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
 
     .wax-seal {
