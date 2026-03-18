@@ -1,1 +1,1 @@
-# the-velvet-salon
+# the-velours-salon
